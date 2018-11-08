@@ -12,7 +12,7 @@ import com.example.vlad.androidapp.Adapters.ProductAdapter;
 import com.example.vlad.androidapp.Entities.Product;
 import com.example.vlad.androidapp.Entities.Products;
 import com.example.vlad.androidapp.R;
-import com.example.vlad.androidapp.ServerUtilities.LCBOClient;
+import com.example.vlad.androidapp.ServerUtilities.LCBOUtility;
 
 import java.util.List;
 
@@ -21,9 +21,6 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.vlad.androidapp.ServerUtilities.LCBOUtility.generateRequest;
-
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recyclerView)
@@ -40,11 +37,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        productAdapter = new ProductAdapter();
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        productAdapter = new ProductAdapter();
         loadData();
+        recyclerView.setAdapter(productAdapter);
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -55,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     public void loadData() {
-        LCBOClient client = generateRequest();
-        Call<Products> call = client.allProducts();
+        Call<Products> call = LCBOUtility.getInstance().getLCBOclient().allProducts();
 
         call.enqueue(new Callback<Products>() {
             @Override
@@ -68,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 recyclerView.setVisibility(View.VISIBLE);
                 productAdapter.setProducts(products);
 
-                recyclerView.setAdapter(productAdapter);
 
             }
 
@@ -79,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
                 t.getCause();
             }
         });
-
     }
 
 }

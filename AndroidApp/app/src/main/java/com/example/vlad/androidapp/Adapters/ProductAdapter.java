@@ -25,15 +25,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).
+        View view = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.list_item, parent, false);
-        return new ViewHolder(v);
+        return new ViewHolder(view);
     }
 
     public void setProducts(List<Product> products) {
         this.products = products;
+        notifyDataSetChanged();
     }
-
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
@@ -53,9 +53,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 view.getContext().startActivity(openProductDetailActivity);
             }
         });
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -78,5 +76,4 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             ButterKnife.bind(this, itemView);
         }
     }
-
 }

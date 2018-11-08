@@ -416,96 +416,48 @@ public class Product {
         return isSeasonal;
     }
 
-    public void setIsSeasonal(Boolean isSeasonal) {
-        this.isSeasonal = isSeasonal;
-    }
-
     public Boolean getIsVqa() {
         return isVqa;
-    }
-
-    public void setIsVqa(Boolean isVqa) {
-        this.isVqa = isVqa;
     }
 
     public Boolean getIsOcb() {
         return isOcb;
     }
 
-    public void setIsOcb(Boolean isOcb) {
-        this.isOcb = isOcb;
-    }
-
     public Boolean getIsKosher() {
         return isKosher;
-    }
-
-    public void setIsKosher(Boolean isKosher) {
-        this.isKosher = isKosher;
     }
 
     public Object getValueAddedPromotionDescription() {
         return valueAddedPromotionDescription;
     }
 
-    public void setValueAddedPromotionDescription(Object valueAddedPromotionDescription) {
-        this.valueAddedPromotionDescription = valueAddedPromotionDescription;
-    }
-
     public Object getDescription() {
         return description;
-    }
-
-    public void setDescription(Object description) {
-        this.description = description;
     }
 
     public String getServingSuggestion() {
         return servingSuggestion;
     }
 
-    public void setServingSuggestion(String servingSuggestion) {
-        this.servingSuggestion = servingSuggestion;
-    }
-
     public String getTastingNote() {
         return tastingNote;
-    }
-
-    public void setTastingNote(String tastingNote) {
-        this.tastingNote = tastingNote;
     }
 
     public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     public String getImageThumbUrl() {
         return imageThumbUrl;
-    }
-
-    public void setImageThumbUrl(String imageThumbUrl) {
-        this.imageThumbUrl = imageThumbUrl;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public String getVarietal() {
         return varietal;
-    }
-
-    public void setVarietal(String varietal) {
-        this.varietal = varietal;
     }
 
     public String getStyle() {
@@ -536,24 +488,11 @@ public class Product {
         return clearanceSaleSavingsInCents;
     }
 
-    public void setClearanceSaleSavingsInCents(Integer clearanceSaleSavingsInCents) {
-        this.clearanceSaleSavingsInCents = clearanceSaleSavingsInCents;
-    }
-
     public Boolean getHasClearanceSale() {
         return hasClearanceSale;
-    }
-
-    public void setHasClearanceSale(Boolean hasClearanceSale) {
-        this.hasClearanceSale = hasClearanceSale;
     }
 
     public Integer getProductNo() {
         return productNo;
     }
-
-    public void setProductNo(Integer productNo) {
-        this.productNo = productNo;
-    }
-
 }
