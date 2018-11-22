@@ -15,7 +15,6 @@ public class LCBOUtility {
         if (instance == null) {
             instance = new LCBOUtility();
         }
-
         return instance;
     }
 

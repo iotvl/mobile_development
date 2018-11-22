@@ -168,10 +168,6 @@ public class Product {
         return isDead;
     }
 
-    public void setIsDead(Boolean isDead) {
-        this.isDead = isDead;
-    }
-
     public String getName() {
         return name;
     }
@@ -184,96 +180,48 @@ public class Product {
         return tags;
     }
 
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
-
     public Boolean getIsDiscontinued() {
         return isDiscontinued;
-    }
-
-    public void setIsDiscontinued(Boolean isDiscontinued) {
-        this.isDiscontinued = isDiscontinued;
     }
 
     public Integer getPriceInCents() {
         return priceInCents;
     }
 
-    public void setPriceInCents(Integer priceInCents) {
-        this.priceInCents = priceInCents;
-    }
-
     public Integer getRegularPriceInCents() {
         return regularPriceInCents;
-    }
-
-    public void setRegularPriceInCents(Integer regularPriceInCents) {
-        this.regularPriceInCents = regularPriceInCents;
     }
 
     public Integer getLimitedTimeOfferSavingsInCents() {
         return limitedTimeOfferSavingsInCents;
     }
 
-    public void setLimitedTimeOfferSavingsInCents(Integer limitedTimeOfferSavingsInCents) {
-        this.limitedTimeOfferSavingsInCents = limitedTimeOfferSavingsInCents;
-    }
-
     public Object getLimitedTimeOfferEndsOn() {
         return limitedTimeOfferEndsOn;
-    }
-
-    public void setLimitedTimeOfferEndsOn(Object limitedTimeOfferEndsOn) {
-        this.limitedTimeOfferEndsOn = limitedTimeOfferEndsOn;
     }
 
     public Integer getBonusRewardMiles() {
         return bonusRewardMiles;
     }
 
-    public void setBonusRewardMiles(Integer bonusRewardMiles) {
-        this.bonusRewardMiles = bonusRewardMiles;
-    }
-
     public Object getBonusRewardMilesEndsOn() {
         return bonusRewardMilesEndsOn;
-    }
-
-    public void setBonusRewardMilesEndsOn(Object bonusRewardMilesEndsOn) {
-        this.bonusRewardMilesEndsOn = bonusRewardMilesEndsOn;
     }
 
     public String getStockType() {
         return stockType;
     }
 
-    public void setStockType(String stockType) {
-        this.stockType = stockType;
-    }
-
     public String getPrimaryCategory() {
         return primaryCategory;
-    }
-
-    public void setPrimaryCategory(String primaryCategory) {
-        this.primaryCategory = primaryCategory;
     }
 
     public String getSecondaryCategory() {
         return secondaryCategory;
     }
 
-    public void setSecondaryCategory(String secondaryCategory) {
-        this.secondaryCategory = secondaryCategory;
-    }
-
     public String getOrigin() {
         return origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
     }
 
     public String getPackage() {
@@ -288,128 +236,65 @@ public class Product {
         return packageUnitType;
     }
 
-    public void setPackageUnitType(String packageUnitType) {
-        this.packageUnitType = packageUnitType;
-    }
 
     public Integer getPackageUnitVolumeInMilliliters() {
         return packageUnitVolumeInMilliliters;
-    }
-
-    public void setPackageUnitVolumeInMilliliters(Integer packageUnitVolumeInMilliliters) {
-        this.packageUnitVolumeInMilliliters = packageUnitVolumeInMilliliters;
     }
 
     public Integer getTotalPackageUnits() {
         return totalPackageUnits;
     }
 
-    public void setTotalPackageUnits(Integer totalPackageUnits) {
-        this.totalPackageUnits = totalPackageUnits;
-    }
-
     public Integer getVolumeInMilliliters() {
         return volumeInMilliliters;
-    }
-
-    public void setVolumeInMilliliters(Integer volumeInMilliliters) {
-        this.volumeInMilliliters = volumeInMilliliters;
     }
 
     public Integer getAlcoholContent() {
         return alcoholContent;
     }
 
-    public void setAlcoholContent(Integer alcoholContent) {
-        this.alcoholContent = alcoholContent;
-    }
-
     public Integer getPricePerLiterOfAlcoholInCents() {
         return pricePerLiterOfAlcoholInCents;
-    }
-
-    public void setPricePerLiterOfAlcoholInCents(Integer pricePerLiterOfAlcoholInCents) {
-        this.pricePerLiterOfAlcoholInCents = pricePerLiterOfAlcoholInCents;
     }
 
     public Integer getPricePerLiterInCents() {
         return pricePerLiterInCents;
     }
 
-    public void setPricePerLiterInCents(Integer pricePerLiterInCents) {
-        this.pricePerLiterInCents = pricePerLiterInCents;
-    }
-
     public Integer getInventoryCount() {
         return inventoryCount;
-    }
-
-    public void setInventoryCount(Integer inventoryCount) {
-        this.inventoryCount = inventoryCount;
     }
 
     public Integer getInventoryVolumeInMilliliters() {
         return inventoryVolumeInMilliliters;
     }
 
-    public void setInventoryVolumeInMilliliters(Integer inventoryVolumeInMilliliters) {
-        this.inventoryVolumeInMilliliters = inventoryVolumeInMilliliters;
-    }
-
     public Integer getInventoryPriceInCents() {
         return inventoryPriceInCents;
-    }
-
-    public void setInventoryPriceInCents(Integer inventoryPriceInCents) {
-        this.inventoryPriceInCents = inventoryPriceInCents;
     }
 
     public Object getSugarContent() {
         return sugarContent;
     }
 
-    public void setSugarContent(Object sugarContent) {
-        this.sugarContent = sugarContent;
-    }
-
     public String getProducerName() {
         return producerName;
-    }
-
-    public void setProducerName(String producerName) {
-        this.producerName = producerName;
     }
 
     public String getReleasedOn() {
         return releasedOn;
     }
 
-    public void setReleasedOn(String releasedOn) {
-        this.releasedOn = releasedOn;
-    }
-
     public Boolean getHasValueAddedPromotion() {
         return hasValueAddedPromotion;
-    }
-
-    public void setHasValueAddedPromotion(Boolean hasValueAddedPromotion) {
-        this.hasValueAddedPromotion = hasValueAddedPromotion;
     }
 
     public Boolean getHasLimitedTimeOffer() {
         return hasLimitedTimeOffer;
     }
 
-    public void setHasLimitedTimeOffer(Boolean hasLimitedTimeOffer) {
-        this.hasLimitedTimeOffer = hasLimitedTimeOffer;
-    }
-
     public Boolean getHasBonusRewardMiles() {
         return hasBonusRewardMiles;
-    }
-
-    public void setHasBonusRewardMiles(Boolean hasBonusRewardMiles) {
-        this.hasBonusRewardMiles = hasBonusRewardMiles;
     }
 
     public Boolean getIsSeasonal() {
@@ -472,17 +357,10 @@ public class Product {
         return tertiaryCategory;
     }
 
-    public void setTertiaryCategory(String tertiaryCategory) {
-        this.tertiaryCategory = tertiaryCategory;
-    }
-
     public Object getSugarInGramsPerLiter() {
         return sugarInGramsPerLiter;
     }
 
-    public void setSugarInGramsPerLiter(Object sugarInGramsPerLiter) {
-        this.sugarInGramsPerLiter = sugarInGramsPerLiter;
-    }
 
     public Integer getClearanceSaleSavingsInCents() {
         return clearanceSaleSavingsInCents;

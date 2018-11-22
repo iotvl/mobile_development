@@ -19,10 +19,6 @@ public class ProductResponse {
         return status;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public Object getMessage() {
         return message;
     }
@@ -33,9 +29,5 @@ public class ProductResponse {
 
     public Product getProduct() {
         return product;
-    }
-
-    public void setResult(Product product) {
-        this.product = product;
     }
 }

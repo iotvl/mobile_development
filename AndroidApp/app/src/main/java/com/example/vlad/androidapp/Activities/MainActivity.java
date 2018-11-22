@@ -1,11 +1,13 @@
 package com.example.vlad.androidapp.Activities;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 
 import com.example.vlad.androidapp.Adapters.ProductAdapter;
@@ -18,6 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -58,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @OnClick(R.id.favorites_button)
+    public void onClick(View view){
+        Intent openFavoritesActivity = new Intent(view.getContext(), FavoritesActivity.class);
+        view.getContext().startActivity(openFavoritesActivity);
+    }
 
     public void loadData() {
         Call<Products> call = LCBOUtility.getInstance().getLCBOclient().allProducts();
@@ -65,12 +72,10 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<Products>() {
             @Override
             public void onResponse(Call<Products> call, Response<Products> response) {
-                List<Product> products = response.body().getResult();
-
                 textNoData.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
+                List<Product> products = response.body().getResult();
                 productAdapter.setProducts(products);
-
 
             }
 
