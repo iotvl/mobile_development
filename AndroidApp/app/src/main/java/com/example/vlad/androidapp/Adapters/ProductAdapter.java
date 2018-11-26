@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import com.example.vlad.androidapp.Activities.ProductDetailActivity;
 import com.example.vlad.androidapp.Entities.Product;
+import com.example.vlad.androidapp.ExApplication;
 import com.example.vlad.androidapp.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,17 +25,21 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     private List<Product> products;
 
+    public ProductAdapter() {
+        this.products = new ArrayList<>();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).
+        View view = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.list_item, parent, false);
-        return new ViewHolder(v);
+        return new ViewHolder(view);
     }
 
     public void setProducts(List<Product> products) {
         this.products = products;
+        notifyDataSetChanged();
     }
-
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
@@ -49,13 +55,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 Intent openProductDetailActivity = new Intent(view.getContext(), ProductDetailActivity.class);
-                openProductDetailActivity.putExtra("id", product.getId());
+                ExApplication.getInstance().setProductId(product.getId());
                 view.getContext().startActivity(openProductDetailActivity);
             }
         });
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -63,7 +67,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         @BindView(R.id.listview_title)
         TextView textViewTitle;
         @BindView(R.id.listview_price)
@@ -78,5 +81,4 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             ButterKnife.bind(this, itemView);
         }
     }
-
 }

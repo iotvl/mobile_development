@@ -49,103 +49,51 @@ public class Pager {
         return recordsPerPage;
     }
 
-    public void setRecordsPerPage(Integer recordsPerPage) {
-        this.recordsPerPage = recordsPerPage;
-    }
-
     public Integer getTotalRecordCount() {
         return totalRecordCount;
-    }
-
-    public void setTotalRecordCount(Integer totalRecordCount) {
-        this.totalRecordCount = totalRecordCount;
     }
 
     public Integer getCurrentPageRecordCount() {
         return currentPageRecordCount;
     }
 
-    public void setCurrentPageRecordCount(Integer currentPageRecordCount) {
-        this.currentPageRecordCount = currentPageRecordCount;
-    }
-
     public Boolean getIsFirstPage() {
         return isFirstPage;
-    }
-
-    public void setIsFirstPage(Boolean isFirstPage) {
-        this.isFirstPage = isFirstPage;
     }
 
     public Boolean getIsFinalPage() {
         return isFinalPage;
     }
 
-    public void setIsFinalPage(Boolean isFinalPage) {
-        this.isFinalPage = isFinalPage;
-    }
-
     public Integer getCurrentPage() {
         return currentPage;
-    }
-
-    public void setCurrentPage(Integer currentPage) {
-        this.currentPage = currentPage;
     }
 
     public String getCurrentPagePath() {
         return currentPagePath;
     }
 
-    public void setCurrentPagePath(String currentPagePath) {
-        this.currentPagePath = currentPagePath;
-    }
-
     public Integer getNextPage() {
         return nextPage;
-    }
-
-    public void setNextPage(Integer nextPage) {
-        this.nextPage = nextPage;
     }
 
     public String getNextPagePath() {
         return nextPagePath;
     }
 
-    public void setNextPagePath(String nextPagePath) {
-        this.nextPagePath = nextPagePath;
-    }
-
     public Object getPreviousPage() {
         return previousPage;
-    }
-
-    public void setPreviousPage(Object previousPage) {
-        this.previousPage = previousPage;
     }
 
     public Object getPreviousPagePath() {
         return previousPagePath;
     }
 
-    public void setPreviousPagePath(Object previousPagePath) {
-        this.previousPagePath = previousPagePath;
-    }
-
     public Integer getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(Integer totalPages) {
-        this.totalPages = totalPages;
-    }
-
     public String getTotalPagesPath() {
         return totalPagesPath;
-    }
-
-    public void setTotalPagesPath(String totalPagesPath) {
-        this.totalPagesPath = totalPagesPath;
     }
 }

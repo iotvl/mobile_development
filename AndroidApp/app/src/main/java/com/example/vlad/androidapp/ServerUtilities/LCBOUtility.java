@@ -5,15 +5,33 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class LCBOUtility {
-    private static Retrofit retrofit;
-    private static LCBOClient request;
 
-    public static LCBOClient generateRequest() {
-        retrofit = new Retrofit.Builder()
-                .baseUrl("http://lcboapi.com")
+    private static LCBOUtility instance = null;
+    private static final String BASE_URL = "http://lcboapi.com";
+
+    private LCBOClient LCBOclient;
+
+    public static LCBOUtility getInstance() {
+        if (instance == null) {
+            instance = new LCBOUtility();
+        }
+        return instance;
+    }
+
+    private LCBOUtility() {
+        buildRetrofit();
+    }
+
+    private void buildRetrofit() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        request = retrofit.create(LCBOClient.class);
-        return request;
+
+        this.LCBOclient = retrofit.create(LCBOClient.class);
+    }
+
+    public LCBOClient getLCBOclient() {
+        return this.LCBOclient;
     }
 }

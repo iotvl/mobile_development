@@ -1,29 +1,29 @@
 package com.example.vlad.androidapp.Activities;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 
 import com.example.vlad.androidapp.Adapters.ProductAdapter;
 import com.example.vlad.androidapp.Entities.Product;
 import com.example.vlad.androidapp.Entities.Products;
 import com.example.vlad.androidapp.R;
-import com.example.vlad.androidapp.ServerUtilities.LCBOClient;
+import com.example.vlad.androidapp.ServerUtilities.LCBOUtility;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.vlad.androidapp.ServerUtilities.LCBOUtility.generateRequest;
-
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recyclerView)
@@ -40,11 +40,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        productAdapter = new ProductAdapter();
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        productAdapter = new ProductAdapter();
         loadData();
+        recyclerView.setAdapter(productAdapter);
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -55,20 +60,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @OnClick(R.id.favorites_button)
+    public void onClick(View view){
+        Intent openFavoritesActivity = new Intent(view.getContext(), FavoritesActivity.class);
+        view.getContext().startActivity(openFavoritesActivity);
+    }
+
     public void loadData() {
-        LCBOClient client = generateRequest();
-        Call<Products> call = client.allProducts();
+        Call<Products> call = LCBOUtility.getInstance().getLCBOclient().allProducts();
 
         call.enqueue(new Callback<Products>() {
             @Override
             public void onResponse(Call<Products> call, Response<Products> response) {
-                List<Product> products = response.body().getResult();
-
                 textNoData.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
+                List<Product> products = response.body().getResult();
                 productAdapter.setProducts(products);
-
-                recyclerView.setAdapter(productAdapter);
 
             }
 
@@ -79,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 t.getCause();
             }
         });
-
     }
 
 }

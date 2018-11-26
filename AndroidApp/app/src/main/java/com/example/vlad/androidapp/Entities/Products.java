@@ -27,10 +27,6 @@ public class Products {
         return status;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public Object getMessage() {
         return message;
     }
@@ -43,24 +39,12 @@ public class Products {
         return pager;
     }
 
-    public void setPager(Pager pager) {
-        this.pager = pager;
-    }
-
     public List<Product> getResult() {
         return result;
     }
 
-    public void setResult(List<Product> result) {
-        this.result = result;
-    }
-
     public Object getSuggestion() {
         return suggestion;
-    }
-
-    public void setSuggestion(Object suggestion) {
-        this.suggestion = suggestion;
     }
 }
 
