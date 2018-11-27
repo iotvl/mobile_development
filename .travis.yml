@@ -71,7 +71,4 @@ deploy:
   on:
     repo: iotvl/mobile_development
     tags: true
-  branches:
-    only:
-    - master
-    - /v\d+\.\d+[a-z]/
+    all_branches: true
