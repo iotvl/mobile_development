@@ -56,8 +56,6 @@ script:
 #  - ./gradlew dependencyCheckAnalyze
   - ./gradlew assembleDebugAndroidTest -PdisablePreDex --continue --stacktrace
   - android-wait-for-emulator
-#  - adb shell input keyevent 82 &
-  - ./gradlew connectedDebugAndroidTest -PdisablePreDex --continue --stacktrace
-
+  - ./gradlew clean assembleDebug test lint
 after_failure:
-  - cat $TRAVIS_BUILD_DIR/AndroidApp/app/build/reports/lint-results.xml
+  - cat $TRAVIS_BUILD_DIR/app/build/reports/lint-results.xml
