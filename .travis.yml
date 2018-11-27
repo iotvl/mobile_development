@@ -65,10 +65,10 @@ deploy:
   provider: releases
   skip_cleanup: true
   overwrite: true
-  api_key: ecee3b6d05c37e8faaa08185adcf67d14f08bb57
+  api_key: "ecee3b6d05c37e8faaa08185adcf67d14f08bb57"
   file_glob: true
   file: /home/travis/build/iotvl/mobile_development/AndroidApp/app/build/outputs/apk/*
   on:
     repo: iotvl/mobile_development
-    tags: true
+    tags: false
     all_branches: true
