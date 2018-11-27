@@ -54,8 +54,20 @@ script:
   - emulator -avd test -no-window &
   - mkdir -p build/reports
 #  - ./gradlew dependencyCheckAnalyze
-  - ./gradlew assembleDebugAndroidTest -PdisablePreDex --continue --stacktrace
   - android-wait-for-emulator
   - ./gradlew clean assembleDebug test lint
+  - ./gradlew assembleDebug
+
 after_failure:
   - cat $TRAVIS_BUILD_DIR/app/build/reports/lint-results.xml
+  
+deploy:
+  provider: releases
+  skip_cleanup: true
+  overwrite: true
+  api_key: ecee3b6d05c37e8faaa08185adcf67d14f08bb57
+  file_glob: true
+  file: /home/travis/build/iotvl/mobile_development/AndroidApp/app/build/outputs/apk/*
+  on:
+    repo: iotvl/mobile_development
+    tags: true
