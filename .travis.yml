@@ -39,20 +39,20 @@ cache:
 before_install:
   - cd AndroidApp
   - chmod +x gradlew
-  - yes | sdkmanager "cmake;3.6.4111459"
+#  - yes | sdkmanager "cmake;3.6.4111459"
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
   - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
 
 script:
-  - android list targets
-  - echo no | android create avd --force -n test -t "android-"$ANDROID_EMULATOR_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
-  - emulator -avd test -no-window &
+#  - android list targets
+#  - echo no | android create avd --force -n test -t "android-"$ANDROID_EMULATOR_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
+#  - emulator -avd test -no-window &
   - mkdir -p build/reports
 #  - ./gradlew dependencyCheckAnalyze
-  - android-wait-for-emulator
-  - ./gradlew clean assembleDebug test lint
-  - ./gradlew assembleDebug
+#  - android-wait-for-emulator
+#  - ./gradlew clean assembleDebug test lint
+  - TERM=dumb ./gradlew assembleDebug
 
 after_success:
   - cd /home/travis/build/iotvl/mobile_development/AndroidApp/app/build/outputs/apk/
