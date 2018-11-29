@@ -58,6 +58,10 @@ script:
   - ./gradlew clean assembleDebug test lint
   - ./gradlew assembleDebug
 
+after_success:
+  - cd /home/travis/build/iotvl/mobile_development/AndroidApp/app/build/outputs/apk/
+  - ls
+
 after_failure:
   - cat $TRAVIS_BUILD_DIR/app/build/reports/lint-results.xml
   
@@ -70,5 +74,5 @@ deploy:
   file: /home/travis/build/iotvl/mobile_development/AndroidApp/app/build/outputs/apk/*
   on:
     repo: iotvl/mobile_development
-    tags: false
+    tags: true
     all_branches: true
