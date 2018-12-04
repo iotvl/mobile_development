@@ -1,6 +1,5 @@
 package com.example.vlad.androidapp.Adapters;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +8,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.vlad.androidapp.Activities.ProductDetailActivity;
 import com.example.vlad.androidapp.Entities.Product;
 import com.example.vlad.androidapp.ExApplication;
 import com.example.vlad.androidapp.R;
+import com.example.vlad.androidapp.RecyclerItemClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,9 +23,11 @@ import butterknife.ButterKnife;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
     private List<Product> products;
+    private RecyclerItemClickListener recyclerItemClickListener;
 
-    public ProductAdapter() {
+    public ProductAdapter(RecyclerItemClickListener recyclerItemClickListener) {
         this.products = new ArrayList<>();
+        this.recyclerItemClickListener = recyclerItemClickListener;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final Product product = products.get(position);
 
         holder.textViewTitle.setText(product.getName());
@@ -54,9 +55,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent openProductDetailActivity = new Intent(view.getContext(), ProductDetailActivity.class);
                 ExApplication.getInstance().setProductId(product.getId());
-                view.getContext().startActivity(openProductDetailActivity);
+                recyclerItemClickListener.onItemClick(product);
             }
         });
     }
