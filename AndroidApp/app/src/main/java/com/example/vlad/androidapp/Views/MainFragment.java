@@ -59,21 +59,20 @@ public class MainFragment extends Fragment implements MainContract.MainView {
     private RecyclerItemClickListener recyclerItemClickListener = new RecyclerItemClickListener() {
         @Override
         public void onItemClick(Product product) {
-            getActivity()
-                    .getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.container, new ProductDetailFragment())
-                    .addToBackStack(null)
-                    .commit();
+            setFragment(new ProductDetailFragment());
         }
     };
 
     @OnClick(R.id.favorites_button)
     public void onClick(){
+        setFragment(new FavoritesFragment());
+    }
+
+    private void setFragment(Fragment fragment){
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container, new FavoritesFragment())
+                .replace(R.id.container, fragment)
                 .addToBackStack(null)
                 .commit();
     }

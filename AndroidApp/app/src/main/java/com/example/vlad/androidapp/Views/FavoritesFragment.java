@@ -44,14 +44,18 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Fav
     private RecyclerItemClickListener recyclerItemClickListener = new RecyclerItemClickListener() {
         @Override
         public void onItemClick(Product product) {
-            getActivity()
-                    .getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.container, new ProductDetailFragment())
-                    .addToBackStack(null)
-                    .commit();
+            setFragment(new ProductDetailFragment());
         }
     };
+
+    private void setFragment(Fragment fragment){
+        getActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
 
     @Override
     public void setDataToRecyclerView(List<Product> productsArrayList) {
