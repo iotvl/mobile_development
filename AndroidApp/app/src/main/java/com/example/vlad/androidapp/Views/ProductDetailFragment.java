@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vlad.androidapp.Contracts.ProductDetailContract;
-import com.example.vlad.androidapp.Intractors.GetProductIntractorImpl;
+import com.example.vlad.androidapp.Interactors.GetProductInteractorImpl;
 import com.example.vlad.androidapp.Presenters.ProductDetailPresenterImpl;
 import com.example.vlad.androidapp.R;
 import com.squareup.picasso.RequestCreator;
@@ -47,9 +47,7 @@ public class ProductDetailFragment extends Fragment implements ProductDetailCont
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.product_detail, container, false);
         ButterKnife.bind(this, view);
-        presenter = new ProductDetailPresenterImpl(this, new GetProductIntractorImpl());
-        presenter.chooseDeleteOrAddButtonBasedOnDbData();
-        presenter.requestDataFromServer();
+        presenter = new ProductDetailPresenterImpl(this, new GetProductInteractorImpl());
         return view;
     }
 
@@ -57,10 +55,10 @@ public class ProductDetailFragment extends Fragment implements ProductDetailCont
     public void onItemClicked(View view) {
         switch (view.getId()) {
             case R.id.add_button:
-                presenter.addDataToDb();
+                presenter.addToFavorite();
                 break;
             case R.id.delete_button:
-                presenter.deleteDataFromDb();
+                presenter.deleteFromFavorite();
                 break;
             case R.id.product_image:
                 fullScreen();
@@ -83,6 +81,10 @@ public class ProductDetailFragment extends Fragment implements ProductDetailCont
     public void goneAddVisibleDeleteButtons() {
         addButton.setVisibility(View.GONE);
         deleteButton.setVisibility(View.VISIBLE);
+    }
+
+    public static ProductDetailFragment newInstance() {
+        return new ProductDetailFragment();
     }
 
     @Override
@@ -118,6 +120,16 @@ public class ProductDetailFragment extends Fragment implements ProductDetailCont
     @Override
     public void setProducerText(String producer) {
         producerTextView.setText("Producer name: " + producer);
+    }
+
+    @Override
+    public void setButton(boolean favorite) {
+        if (favorite){
+            goneAddVisibleDeleteButtons();
+        }
+        else {
+            goneDeleteVisibleAddButtons();
+        }
     }
 
     @Override

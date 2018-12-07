@@ -3,6 +3,7 @@ package com.example.vlad.androidapp;
 import android.app.Application;
 
 import com.example.vlad.androidapp.ServerUtilities.LCBOClient;
+import com.example.vlad.androidapp.Views.ProductDetailFragment;
 
 import retrofit2.converter.gson.GsonConverterFactory;
 

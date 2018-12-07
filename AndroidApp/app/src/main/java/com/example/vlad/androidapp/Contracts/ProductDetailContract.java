@@ -8,13 +8,8 @@ import com.squareup.picasso.RequestCreator;
 public interface ProductDetailContract {
     interface ProductDetailPresenter {
         void onDestroy();
-        void requestDataFromServer();
-
-        void chooseDeleteOrAddButtonBasedOnDbData();
-
-        void deleteDataFromDb();
-
-        void addDataToDb();
+        void deleteFromFavorite();
+        void addToFavorite();
     }
 
     interface ProductDetailView {
@@ -28,17 +23,18 @@ public interface ProductDetailContract {
         void setPackageText(String mPackage);
         void setOriginText(String origin);
         void setProducerText(String producer);
+        void setButton(boolean favorite);
 
         FragmentActivity getNowActivity();
     }
 
-    interface GetProductIntractor{
+    interface GetProductInteractor {
         interface OnFinishedListener {
             void onFinished(Product product);
             void onFailure(Throwable t);
         }
 
-        void getProduct(ProductDetailContract.GetProductIntractor.OnFinishedListener onFinishedListener);
+        void getProduct(int id, GetProductInteractor.OnFinishedListener onFinishedListener);
 
     }
 }

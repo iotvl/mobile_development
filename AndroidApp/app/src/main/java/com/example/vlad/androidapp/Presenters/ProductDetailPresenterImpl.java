@@ -1,7 +1,5 @@
 package com.example.vlad.androidapp.Presenters;
 
-import android.content.Context;
-
 import com.example.vlad.androidapp.Contracts.ProductDetailContract;
 import com.example.vlad.androidapp.DatabaseHelper;
 import com.example.vlad.androidapp.Entities.Product;
@@ -9,19 +7,20 @@ import com.example.vlad.androidapp.ExApplication;
 import com.squareup.picasso.Picasso;
 
 public class ProductDetailPresenterImpl implements ProductDetailContract.ProductDetailPresenter,
-        ProductDetailContract.GetProductIntractor.OnFinishedListener {
+        ProductDetailContract.GetProductInteractor.OnFinishedListener {
 
     private ProductDetailContract.ProductDetailView productDetailView;
-    private ProductDetailContract.GetProductIntractor getProductIntractor;
+    private ProductDetailContract.GetProductInteractor getProductInteractor;
     private DatabaseHelper mDatabaseHelper;
     private int id;
 
     public ProductDetailPresenterImpl(ProductDetailContract.ProductDetailView productDetailView,
-                                      ProductDetailContract.GetProductIntractor getProductIntractor) {
+                                      ProductDetailContract.GetProductInteractor getProductInteractor) {
         this.productDetailView = productDetailView;
-        this.getProductIntractor = getProductIntractor;
+        this.getProductInteractor = getProductInteractor;
         this.mDatabaseHelper = new DatabaseHelper(productDetailView.getNowActivity());
         this.id = ExApplication.getInstance().getProductId();
+        loadProduct();
     }
 
     @Override
@@ -29,30 +28,21 @@ public class ProductDetailPresenterImpl implements ProductDetailContract.Product
         productDetailView = null;
     }
 
-    @Override
-    public void requestDataFromServer() {
-        getProductIntractor.getProduct(this);
+    private void loadProduct() {
+        int id = ExApplication.getInstance().getProductId();
+        getProductInteractor.getProduct(id,this);
     }
 
     @Override
-    public void chooseDeleteOrAddButtonBasedOnDbData(){
-        if (mDatabaseHelper.checkIsDataAlreadyInDb(id)){
-            productDetailView.goneAddVisibleDeleteButtons();
-        } else {
-            productDetailView.goneDeleteVisibleAddButtons();
-        }
-    }
-
-    @Override
-    public void deleteDataFromDb(){
+    public void deleteFromFavorite(){
         mDatabaseHelper.deleteData(id);
-        productDetailView.goneDeleteVisibleAddButtons();
+        productDetailView.setButton(false);
     }
 
     @Override
-    public void addDataToDb(){
+    public void addToFavorite(){
         mDatabaseHelper.insertData(id);
-        productDetailView.goneAddVisibleDeleteButtons();
+        productDetailView.setButton(true);
     }
 
     @Override
@@ -65,6 +55,7 @@ public class ProductDetailPresenterImpl implements ProductDetailContract.Product
             productDetailView.setPackageText(product.getPackage());
             productDetailView.setOriginText(product.getOrigin());
             productDetailView.setProducerText(product.getProducerName());
+            productDetailView.setButton(mDatabaseHelper.checkIsDataAlreadyInDb(id));
         }
     }
 

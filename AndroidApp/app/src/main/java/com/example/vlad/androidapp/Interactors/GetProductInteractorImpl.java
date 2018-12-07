@@ -1,18 +1,16 @@
-package com.example.vlad.androidapp.Intractors;
+package com.example.vlad.androidapp.Interactors;
 
 import com.example.vlad.androidapp.Contracts.ProductDetailContract;
 import com.example.vlad.androidapp.Entities.ProductResponse;
-import com.example.vlad.androidapp.Entities.Products;
 import com.example.vlad.androidapp.ExApplication;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GetProductIntractorImpl implements ProductDetailContract.GetProductIntractor {
+public class GetProductInteractorImpl implements ProductDetailContract.GetProductInteractor {
     @Override
-    public void getProduct(final OnFinishedListener onFinishedListener) {
-        int id = ExApplication.getInstance().getProductId();
+    public void getProduct(final int id, final OnFinishedListener onFinishedListener) {
         Call<ProductResponse> call = ExApplication.getInstance().getLCBOclient().getProduct(id);
         call.enqueue(new Callback<ProductResponse>() {
             @Override

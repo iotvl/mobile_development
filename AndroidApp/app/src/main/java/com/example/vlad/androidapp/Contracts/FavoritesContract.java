@@ -9,24 +9,12 @@ import java.util.List;
 public interface FavoritesContract {
     interface FavoritesPresenter {
         void onDestroy();
-        void requestDataFromServer();
     }
 
     interface FavoritesView {
         FragmentActivity getNowActivity();
 
-        void setDataToRecyclerView(List<Product> productsArrayList);
+        void showFavorites(List<Product> favoriteProductsArrayList);
         void onResponseFailure(Throwable throwable);
-    }
-
-    interface GetFavoritesProductIntractor{
-
-        interface OnFinishedListener {
-            void onFinished(Product product);
-            void onFailure(Throwable t);
-        }
-
-        void getProduct(int id, FavoritesContract.GetFavoritesProductIntractor.OnFinishedListener onFinishedListener);
-
     }
 }

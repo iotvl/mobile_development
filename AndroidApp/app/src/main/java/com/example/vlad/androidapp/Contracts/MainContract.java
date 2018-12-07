@@ -9,19 +9,15 @@ public interface MainContract {
     interface MainPresenter {
         void onDestroy();
         void onRefreshListener();
-        void requestDataFromServer();
     }
 
     interface MainView {
-        void setDataToRecyclerView(List<Product> productsArrayList);
+        void showProductsView(List<Product> productsArrayList);
         void onResponseFailure(Throwable throwable);
-        void hideTextNoData();
-        void showTextNoData();
-        void hideRecyclerView();
-        void showRecyclerView();
+        void showNoDataView();
     }
 
-    interface GetProductsIntractor{
+    interface GetProductsInteractor {
         interface OnFinishedListener {
             void onFinished(List<Product> productsArrayList);
             void onFailure(Throwable t);

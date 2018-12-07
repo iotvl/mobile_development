@@ -8,16 +8,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.vlad.androidapp.Adapters.ProductAdapter;
 import com.example.vlad.androidapp.Contracts.MainContract;
 import com.example.vlad.androidapp.Entities.Product;
-import com.example.vlad.androidapp.Intractors.GetProductsIntractorImpl;
+import com.example.vlad.androidapp.Interactors.GetProductsInteractorImpl;
+import com.example.vlad.androidapp.NavigationManager;
 import com.example.vlad.androidapp.Presenters.MainPresenterImpl;
 import com.example.vlad.androidapp.R;
 import com.example.vlad.androidapp.RecyclerItemClickListener;
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,6 +32,10 @@ public class MainFragment extends Fragment implements MainContract.MainView {
     protected TextView textNoData;
     @BindView(R.id.pullToRefresh)
     protected SwipeRefreshLayout pullToRefresh;
+    @BindView(R.id.timer_button)
+    protected Button timerButton;
+    @BindView(R.id.favorites_button)
+    protected Button favrites_button;
 
     private ProductAdapter productAdapter;
     private MainContract.MainPresenter presenter;
@@ -39,11 +44,10 @@ public class MainFragment extends Fragment implements MainContract.MainView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, view);
-        presenter = new MainPresenterImpl(this, new GetProductsIntractorImpl());
+        presenter = new MainPresenterImpl(this, new GetProductsInteractorImpl());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        presenter.requestDataFromServer();
         productAdapter = new ProductAdapter(recyclerItemClickListener);
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -59,26 +63,30 @@ public class MainFragment extends Fragment implements MainContract.MainView {
     private RecyclerItemClickListener recyclerItemClickListener = new RecyclerItemClickListener() {
         @Override
         public void onItemClick(Product product) {
-            setFragment(new ProductDetailFragment());
+            NavigationManager.getNavigationManager().startProductDetail();
         }
     };
 
-    @OnClick(R.id.favorites_button)
-    public void onClick(){
-        setFragment(new FavoritesFragment());
+    @OnClick({R.id.favorites_button, R.id.timer_button})
+    public void onItemClicked(View view) {
+        switch (view.getId()) {
+            case R.id.favorites_button:
+                NavigationManager.getNavigationManager().startFavorites();
+                break;
+            case R.id.timer_button:
+                NavigationManager.getNavigationManager().startTimer();
+                break;
+        }
     }
 
-    private void setFragment(Fragment fragment){
-        getActivity()
-                .getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit();
+    public static MainFragment newInstance() {
+        return new MainFragment();
     }
 
     @Override
-    public void setDataToRecyclerView(List<Product> productsArrayList) {
+    public void showProductsView(List<Product> productsArrayList) {
+        textNoData.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
         productAdapter.setProducts(productsArrayList);
         recyclerView.setAdapter(productAdapter);
     }
@@ -89,23 +97,9 @@ public class MainFragment extends Fragment implements MainContract.MainView {
     }
 
     @Override
-    public void hideTextNoData() {
-        textNoData.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showTextNoData() {
-        textNoData.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideRecyclerView() {
+    public void showNoDataView() {
         recyclerView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showRecyclerView() {
-        recyclerView.setVisibility(View.VISIBLE);
+        textNoData.setVisibility(View.VISIBLE);
     }
 
     @Override

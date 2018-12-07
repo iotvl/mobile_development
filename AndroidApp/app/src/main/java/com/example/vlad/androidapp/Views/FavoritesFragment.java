@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 import com.example.vlad.androidapp.Adapters.ProductAdapter;
 import com.example.vlad.androidapp.Contracts.FavoritesContract;
 import com.example.vlad.androidapp.Entities.Product;
-import com.example.vlad.androidapp.Intractors.GetFavoritesIntractorImpl;
+import com.example.vlad.androidapp.Interactors.GetProductInteractorImpl;
+import com.example.vlad.androidapp.NavigationManager;
 import com.example.vlad.androidapp.Presenters.FavoritesPresenterImpl;
 import com.example.vlad.androidapp.R;
 import com.example.vlad.androidapp.RecyclerItemClickListener;
@@ -33,33 +34,27 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Fav
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.favorites_activity, container, false);
         ButterKnife.bind(this, view);
-        presenter = new FavoritesPresenterImpl(this, new GetFavoritesIntractorImpl());
+        presenter = new FavoritesPresenterImpl(this, new GetProductInteractorImpl());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         productAdapter = new ProductAdapter(recyclerItemClickListener);
-        presenter.requestDataFromServer();
         return view;
     }
 
     private RecyclerItemClickListener recyclerItemClickListener = new RecyclerItemClickListener() {
         @Override
         public void onItemClick(Product product) {
-            setFragment(new ProductDetailFragment());
+            NavigationManager.getNavigationManager().startProductDetail();
         }
     };
 
-    private void setFragment(Fragment fragment){
-        getActivity()
-                .getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit();
+    public static FavoritesFragment newInstance() {
+        return new FavoritesFragment();
     }
 
     @Override
-    public void setDataToRecyclerView(List<Product> productsArrayList) {
-        productAdapter.setProducts(productsArrayList);
+    public void showFavorites(List<Product> favoriteProductsArrayList) {
+        productAdapter.setProducts(favoriteProductsArrayList);
         recyclerView.setAdapter(productAdapter);
     }
 

@@ -1,20 +1,14 @@
-package com.example.vlad.androidapp.Intractors;
-
-import android.view.View;
+package com.example.vlad.androidapp.Interactors;
 
 import com.example.vlad.androidapp.Contracts.MainContract;
-import com.example.vlad.androidapp.Entities.Product;
 import com.example.vlad.androidapp.Entities.Products;
 import com.example.vlad.androidapp.ExApplication;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GetProductsIntractorImpl implements MainContract.GetProductsIntractor {
+public class GetProductsInteractorImpl implements MainContract.GetProductsInteractor {
     @Override
     public void getProductsArrayList(final OnFinishedListener onFinishedListener) {
         Call<Products> call = ExApplication.getInstance().getLCBOclient().allProducts();

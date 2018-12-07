@@ -6,15 +6,16 @@ import com.example.vlad.androidapp.Entities.Product;
 import java.util.List;
 
 public class MainPresenterImpl implements MainContract.MainPresenter,
-        MainContract.GetProductsIntractor.OnFinishedListener{
+        MainContract.GetProductsInteractor.OnFinishedListener{
 
     private MainContract.MainView mainView;
-    private MainContract.GetProductsIntractor getProductsIntractor;
+    private MainContract.GetProductsInteractor getProductsInteractor;
 
     public MainPresenterImpl(MainContract.MainView mainView,
-                             MainContract.GetProductsIntractor getProductsIntractor){
+                             MainContract.GetProductsInteractor getProductsInteractor){
         this.mainView = mainView;
-        this.getProductsIntractor = getProductsIntractor;
+        this.getProductsInteractor = getProductsInteractor;
+        getProductsInteractor.getProductsArrayList(this);
     }
 
     @Override
@@ -24,20 +25,13 @@ public class MainPresenterImpl implements MainContract.MainPresenter,
 
     @Override
     public void onRefreshListener() {
-        getProductsIntractor.getProductsArrayList(this);
-    }
-
-    @Override
-    public void requestDataFromServer() {
-        getProductsIntractor.getProductsArrayList(this);
+        getProductsInteractor.getProductsArrayList(this);
     }
 
     @Override
     public void onFinished(List<Product> productsArrayList) {
         if(mainView!=null){
-            mainView.hideTextNoData();
-            mainView.showRecyclerView();
-            mainView.setDataToRecyclerView(productsArrayList);
+            mainView.showProductsView(productsArrayList);
         }
     }
 
@@ -45,8 +39,7 @@ public class MainPresenterImpl implements MainContract.MainPresenter,
     public void onFailure(Throwable t) {
         if(mainView!=null){
             mainView.onResponseFailure(t);
-            mainView.hideRecyclerView();
-            mainView.showTextNoData();
+            mainView.showNoDataView();
         }
     }
 
