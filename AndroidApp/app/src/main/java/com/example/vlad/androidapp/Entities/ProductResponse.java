@@ -23,10 +23,6 @@ public class ProductResponse {
         return message;
     }
 
-    public void setMessage(Object message) {
-        this.message = message;
-    }
-
     public Product getProduct() {
         return product;
     }
