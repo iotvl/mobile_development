@@ -72,22 +72,6 @@ public class ProductDetailFragment extends Fragment implements ProductDetailCont
     }
 
     @Override
-    public void goneDeleteVisibleAddButtons() {
-        deleteButton.setVisibility(View.GONE);
-        addButton.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void goneAddVisibleDeleteButtons() {
-        addButton.setVisibility(View.GONE);
-        deleteButton.setVisibility(View.VISIBLE);
-    }
-
-    public static ProductDetailFragment newInstance() {
-        return new ProductDetailFragment();
-    }
-
-    @Override
     public void setImageView(RequestCreator load) {
         load.into(imageView);
     }
@@ -125,10 +109,12 @@ public class ProductDetailFragment extends Fragment implements ProductDetailCont
     @Override
     public void setButton(boolean favorite) {
         if (favorite){
-            goneAddVisibleDeleteButtons();
+            addButton.setVisibility(View.GONE);
+            deleteButton.setVisibility(View.VISIBLE);
         }
         else {
-            goneDeleteVisibleAddButtons();
+            deleteButton.setVisibility(View.GONE);
+            addButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -138,8 +124,7 @@ public class ProductDetailFragment extends Fragment implements ProductDetailCont
     }
 
     private void fullScreen() {
-        int uiOptions = getActivity().getWindow().getDecorView().getSystemUiVisibility();
-        int newUiOptions = uiOptions;
+        int newUiOptions = getActivity().getWindow().getDecorView().getSystemUiVisibility();
         if (Build.VERSION.SDK_INT >= 14) {
             newUiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         }

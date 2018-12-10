@@ -18,7 +18,7 @@ import com.example.vlad.androidapp.Interactors.GetProductsInteractorImpl;
 import com.example.vlad.androidapp.NavigationManager;
 import com.example.vlad.androidapp.Presenters.MainPresenterImpl;
 import com.example.vlad.androidapp.R;
-import com.example.vlad.androidapp.RecyclerItemClickListener;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -32,8 +32,6 @@ public class MainFragment extends Fragment implements MainContract.MainView {
     protected TextView textNoData;
     @BindView(R.id.pullToRefresh)
     protected SwipeRefreshLayout pullToRefresh;
-    @BindView(R.id.timer_button)
-    protected Button timerButton;
     @BindView(R.id.favorites_button)
     protected Button favrites_button;
 
@@ -48,7 +46,7 @@ public class MainFragment extends Fragment implements MainContract.MainView {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        productAdapter = new ProductAdapter(recyclerItemClickListener);
+        productAdapter = new ProductAdapter();
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -60,28 +58,11 @@ public class MainFragment extends Fragment implements MainContract.MainView {
         return view;
     }
 
-    private RecyclerItemClickListener recyclerItemClickListener = new RecyclerItemClickListener() {
-        @Override
-        public void onItemClick(Product product) {
-            NavigationManager.getNavigationManager().startProductDetail();
-        }
-    };
-
-    @OnClick({R.id.favorites_button, R.id.timer_button})
-    public void onItemClicked(View view) {
-        switch (view.getId()) {
-            case R.id.favorites_button:
-                NavigationManager.getNavigationManager().startFavorites();
-                break;
-            case R.id.timer_button:
-                NavigationManager.getNavigationManager().startTimer();
-                break;
-        }
+    @OnClick(R.id.favorites_button)
+    public void onClick() {
+        NavigationManager.getNavigationManager().startFavorites();
     }
 
-    public static MainFragment newInstance() {
-        return new MainFragment();
-    }
 
     @Override
     public void showProductsView(List<Product> productsArrayList) {

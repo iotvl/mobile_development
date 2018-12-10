@@ -33,7 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_NAME, null, contentValues);
     }
 
-    public boolean checkIsDataAlreadyInDb(int id) {
+    public boolean checkIsFavorite(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE id=" + id;
         Cursor cursor = db.rawQuery(query, null);

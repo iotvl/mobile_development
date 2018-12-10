@@ -55,7 +55,7 @@ public class ProductDetailPresenterImpl implements ProductDetailContract.Product
             productDetailView.setPackageText(product.getPackage());
             productDetailView.setOriginText(product.getOrigin());
             productDetailView.setProducerText(product.getProducerName());
-            productDetailView.setButton(mDatabaseHelper.checkIsDataAlreadyInDb(id));
+            productDetailView.setButton(mDatabaseHelper.checkIsFavorite(id));
         }
     }
 

@@ -14,8 +14,6 @@ public interface ProductDetailContract {
 
     interface ProductDetailView {
         void onResponseFailure(Throwable throwable);
-        void goneDeleteVisibleAddButtons();
-        void goneAddVisibleDeleteButtons();
         void setImageView(RequestCreator load);
         void setTitleText(String title);
         void setPriceText(double price);

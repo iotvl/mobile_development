@@ -16,7 +16,6 @@ import com.example.vlad.androidapp.Interactors.GetProductInteractorImpl;
 import com.example.vlad.androidapp.NavigationManager;
 import com.example.vlad.androidapp.Presenters.FavoritesPresenterImpl;
 import com.example.vlad.androidapp.R;
-import com.example.vlad.androidapp.RecyclerItemClickListener;
 
 import java.util.List;
 
@@ -37,24 +36,13 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Fav
         presenter = new FavoritesPresenterImpl(this, new GetProductInteractorImpl());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        productAdapter = new ProductAdapter(recyclerItemClickListener);
+        productAdapter = new ProductAdapter();
         return view;
     }
 
-    private RecyclerItemClickListener recyclerItemClickListener = new RecyclerItemClickListener() {
-        @Override
-        public void onItemClick(Product product) {
-            NavigationManager.getNavigationManager().startProductDetail();
-        }
-    };
-
-    public static FavoritesFragment newInstance() {
-        return new FavoritesFragment();
-    }
-
     @Override
-    public void showFavorites(List<Product> favoriteProductsArrayList) {
-        productAdapter.setProducts(favoriteProductsArrayList);
+    public void showFavorites(List<Product> favoriteProducts) {
+        productAdapter.setProducts(favoriteProducts);
         recyclerView.setAdapter(productAdapter);
     }
 

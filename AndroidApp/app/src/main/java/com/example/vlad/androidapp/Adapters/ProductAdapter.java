@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.example.vlad.androidapp.Entities.Product;
 import com.example.vlad.androidapp.ExApplication;
+import com.example.vlad.androidapp.NavigationManager;
 import com.example.vlad.androidapp.R;
-import com.example.vlad.androidapp.RecyclerItemClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -23,11 +23,9 @@ import butterknife.ButterKnife;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
     private List<Product> products;
-    private RecyclerItemClickListener recyclerItemClickListener;
 
-    public ProductAdapter(RecyclerItemClickListener recyclerItemClickListener) {
+    public ProductAdapter() {
         this.products = new ArrayList<>();
-        this.recyclerItemClickListener = recyclerItemClickListener;
     }
 
     @Override
@@ -56,7 +54,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 ExApplication.getInstance().setProductId(product.getId());
-                recyclerItemClickListener.onItemClick(product);
+                NavigationManager.getNavigationManager().startProductDetail();
             }
         });
     }

@@ -14,7 +14,7 @@ public interface FavoritesContract {
     interface FavoritesView {
         FragmentActivity getNowActivity();
 
-        void showFavorites(List<Product> favoriteProductsArrayList);
+        void showFavorites(List<Product> favoriteProducts);
         void onResponseFailure(Throwable throwable);
     }
 }
